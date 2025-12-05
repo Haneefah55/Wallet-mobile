@@ -5,17 +5,14 @@ import { Ionicons } from '@expo/vector-icons'
 import ExpenseChart from '../../components/ExpenseChart.jsx'
 import axios from '../../utils/axios.js'
 import { getPreviousWeeks } from '../../utils/getWeeks.js'
-import { useTailwind } from 'nativewind'
+
 import { useTransactionStore } from '../../store/transactionStore.js'
 import { useRouter } from 'expo-router'
-import * as AuthSession from 'expo-auth-session'
-//import { ScrollView } from 'react-native-reanimated/lib/typescript/Animated.js'
+
 
 const HomeScreen = () => {
   const { user } = useAuthStore()
-  //console.log(user)
-
-  console.log("AuthSession", AuthSession.makeRedirectUri())
+  console.log(user)
 
   const [isDrop, setIsDrop] = useState(false)
   
@@ -102,7 +99,7 @@ const HomeScreen = () => {
   return (
 
     
-    <View className=" bg-gray-50  px-4 py-4 flex-1 flex-col"> 
+    <View className=" bg-gray-50 mt-10 px-4 py-4 flex-1 flex-col"> 
       
       <View className="flex  flex-row items-center justify-between my-3">
         <View className=" flex flex-row px-3 items-center">

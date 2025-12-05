@@ -1,16 +1,20 @@
-import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
+import { Stack, useLocalSearchParams, usePathname, useRouter, useSegments } from 'expo-router';
+import { useLinkingURL } from 'expo-linking';
+import * as Linking from 'expo-linking'
 
 import * as SplashScreen from 'expo-splash-screen'
 
 import '../global.css'
 import Toast from 'react-native-toast-message';
 import { useFonts } from 'expo-font'
-import { ActivityIndicator, Animated, StatusBar, View } from 'react-native';
+import { ActivityIndicator, Alert, Animated, AppState, StatusBar, View } from 'react-native';
+import axios from '../utils/axios.js'
 
 
 import { useAuthStore } from '../store/authStore.js';
 import { useEffect, useRef, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 
 SplashScreen.preventAutoHideAsync()
 
@@ -18,13 +22,14 @@ export default function RootLayout() {
 
   const fadeAnim = useRef(new Animated.Value(0)).current
 
-  const { checkAuth, isAuthenticated, user } = useAuthStore()
-  const segment = useSegments()
+
+  const { checkAuth, isAuthenticated, user, logout } = useAuthStore()
+
   const router = useRouter()
   const pathname = usePathname()
   const [isReady, setIsReady] = useState(false)
 
-  //console.log("user", user)
+  console.log("user", user)
   const [fontsLoaded] = useFonts({
     'OutfitRegular': require('../assets/fonts/Outfit-Regular.ttf'),
     'OutfitBold': require('../assets/fonts/Outfit-Bold.ttf'),
@@ -32,6 +37,8 @@ export default function RootLayout() {
     'OutfitSemiBold': require('../assets/fonts/Outfit-SemiBold.ttf'),
     'OutfitThin': require('../assets/fonts/Outfit-Thin.ttf'),
   })
+
+
   
   useEffect(() =>{
 
@@ -77,13 +84,29 @@ export default function RootLayout() {
     //const inAuthGroup = segment[0] === '(auth)'
     const isAuthRoute = pathname.includes('(auth)')
     const isTabsRoute = pathname.includes('(tabs)')
-    if(isAuthenticated && isTabsRoute) {
-      router.replace('/(tabs)')
+    if(user && !isTabsRoute) {
+      router.replace('/(tabs)/home')
     } 
 
   }, [isAuthenticated, pathname, isReady, user])
 
-  
+  useEffect(() => {
+    const fetchBackend = async () =>{
+      try {
+        const res = await axios.get('/')
+        console.log(res)
+        //Alert.alert(res.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+
+    fetchBackend()
+  }, [])
+
+
+
 
   if(!fontsLoaded){
 

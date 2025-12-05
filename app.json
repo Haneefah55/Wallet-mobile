@@ -4,8 +4,10 @@
     "slug": "wallet",
     "version": "1.0.0",
     "orientation": "portrait",
+    "owner": "haneefah55",
     "icon": "./assets/images/splash-icon.png",
     "scheme": "wallet",
+    "platforms": ["ios", "android", "web"],
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {

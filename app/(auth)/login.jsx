@@ -4,8 +4,18 @@ import React, { useEffect, useState } from 'react'
 import { Link, useRouter } from 'expo-router'
 import { useAuthStore } from '../../store/authStore';
 import { Ionicons, Lucide } from '@expo/vector-icons';
+import * as WebBrowser from 'expo-web-browser'
+
+WebBrowser.maybeCompleteAuthSession()
+
 
 const LoginScreen = () => {
+
+  const start = async() => {
+      await WebBrowser.openBrowserAsync(`${process.env.API_URL}/auth/google`)
+  
+      //console.log(result)
+  }
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -25,7 +35,7 @@ const LoginScreen = () => {
     
 
    } catch (error) {
-    
+      
    }
   }
 
@@ -78,6 +88,15 @@ const LoginScreen = () => {
 
         />
 
+        {error && 
+        <View className="mt-5 mb-5">
+
+          <Text className='text-lg text-red-600 font-outfit-medium'>{error}</Text>
+
+        </View>
+        
+        }
+
 
         <TouchableOpacity className="w-[280px] bg-fuchsia-900 text-white mt-3 p-3 flex rounded-lg items-center justify-center" onPress={handleLogin}>
           <Text className="text-white font-outfit-semibold text-2xl">
@@ -96,6 +115,10 @@ const LoginScreen = () => {
           
 
         </View>
+
+        <TouchableOpacity className="w-[280px] mb-10 bg-blue-600 text-white mt-7 p-3 flex rounded-lg items-center justify-center" onPress={() => start()}>
+          <Text className="text-white font-outfit-medium text-xl">Continue with Google ?</Text>
+        </TouchableOpacity>
 
 
       </View>

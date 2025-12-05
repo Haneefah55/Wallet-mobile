@@ -8,6 +8,7 @@ const axiosInstance = axios.create({
     'Accept': 'application/json',
   },
   withCredentials: true,
+  timeout: 120000,
 })
 
 export default axiosInstance

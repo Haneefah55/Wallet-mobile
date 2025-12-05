@@ -64,7 +64,7 @@ const Layout = () => {
           tabBarIcon: () => (
             
            
-            <TouchableOpacity className="flex items-center justify-center bg-red-600 w-7 h-7 p-7 rounded-full -top-5" onPress={() => router.push('/(tabs)/transaction/addTransaction')}>
+            <TouchableOpacity className="flex items-center justify-center bg-red-600 w-7 h-7 p-7 rounded-full -top-5" onPress={() => router.replace('/(tabs)/transaction/addTransaction')}>
             
                 <Ionicons name='add' size={30} color={"#fff"} style={{ position: 'absolute'}} />
           
