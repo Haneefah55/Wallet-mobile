@@ -116,8 +116,18 @@ const LoginScreen = () => {
 
         </View>
 
-        <TouchableOpacity className="w-[280px] mb-10 bg-blue-600 text-white mt-7 p-3 flex rounded-lg items-center justify-center" onPress={() => start()}>
-          <Text className="text-white font-outfit-medium text-xl">Continue with Google ?</Text>
+        <View className="flex mt-4 bg-fuchsia-800 w-[280px]  h-0.5">
+
+        </View>
+
+        <Text className="text-center font-outfit-medium text-lg mt-3">Continue with</Text>
+
+        <TouchableOpacity className="w-[280px] mb-10 bg-white text-white mt-4 p-3 flex rounded-lg items-center justify-center" onPress={() => start()}>
+          <Image 
+            className="w-[70px] h-[23px] object-contain"
+            source={require("../../assets/images/goo.png")}
+          
+          />
         </TouchableOpacity>
 
 

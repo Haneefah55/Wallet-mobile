@@ -12,7 +12,7 @@ import { useRouter } from 'expo-router'
 
 const HomeScreen = () => {
   const { user } = useAuthStore()
-  console.log(user)
+  //console.log(user)
 
   const [isDrop, setIsDrop] = useState(false)
   
@@ -99,7 +99,7 @@ const HomeScreen = () => {
   return (
 
     
-    <View className=" bg-gray-50 mt-10 px-4 py-4 flex-1 flex-col"> 
+    <View className=" bg-gray-50 px-4 py-4 flex-1 flex-col"> 
       
       <View className="flex  flex-row items-center justify-between my-3">
         <View className=" flex flex-row px-3 items-center">
@@ -239,10 +239,6 @@ const HomeScreen = () => {
                   <View className="flex flex-col gap-1 justify-center" >
                     <View className="flex flex-row gap-3">
                       <Text className={` text-xl font-outfit-medium ${item?.type === "expense" ? "text-red-600" : "text-green-600"}`}>&#8358;  {item?.amount.toLocaleString()}</Text>
-
-                      <TouchableOpacity>
-                        <Ionicons name='trash' size={20} color={`${item?.type === "expense" ? "#dc2626" : "#16a34a"}`}/>
-                      </TouchableOpacity>
                     </View>
 
                     <Text className="font-outfit text-gray-500 text-sm">{item?.date?.split("T")[0]}</Text>

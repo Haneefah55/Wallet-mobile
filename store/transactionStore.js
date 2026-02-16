@@ -55,7 +55,7 @@ export const useTransactionStore = create((set, get) =>({
       
 
       get().fetchSummary()
-      get.fetchAllTransactions()
+      get().fetchAllTransactions()
 
     } catch (error) {
       console.log("add transaction err", error.message)
@@ -64,13 +64,13 @@ export const useTransactionStore = create((set, get) =>({
     }
   },
 
-  editTransaction: async (type, title, amount, category, date, id) => {
+  editTransaction: async (title, amount, category, date, id) => {
 
     set({ loading: true, error: null })
 
     try {
-      const res = await axios.patch(`/transaction/${id}`, { type, title, amount, category, date })
-      console.log("add res", res.data)
+      const res = await axios.patch(`/transaction/${id}`, { title, amount, category, date })
+      console.log("edit res", res.data)
 
       set({ loading: false })
 
@@ -92,7 +92,7 @@ export const useTransactionStore = create((set, get) =>({
 
     try {
       const res = await axios.delete(`/transaction/${id}`)
-      console.log("add res", res.data)
+      //console.log("add res", res.data)
 
       set((prev) =>({
       transactions: prev.transactions.filter((transaction) => transaction._id !== id),

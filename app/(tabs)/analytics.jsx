@@ -202,7 +202,7 @@ const analytics = () => {
     <View className="flex-1 flex-col p-5">
 
       <View className=" mb-5">
-        <TouchableOpacity className="" onPress={() => router.back }>
+        <TouchableOpacity className="" onPress={() => router.push('/(tabs)/home') }>
           <Ionicons name='arrow-back' size={20} />
         </TouchableOpacity>
 

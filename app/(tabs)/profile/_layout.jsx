@@ -3,18 +3,19 @@ import React from 'react'
 import { Stack } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-const TransactionLayout = () => {
+const ProfileLayout = () => {
   return (
 
     <SafeAreaView style={{ flex: 1 }}>
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name='addTransaction' />
-        <Stack.Screen name='allTransaction' />
-        <Stack.Screen name='edit-transaction/[id]' />
+        <Stack.Screen name='index' />
+        <Stack.Screen name='view-profile' />
+        <Stack.Screen name='verify-account' />
+        
       </Stack>
     </SafeAreaView>
     
   )
 }
 
-export default TransactionLayout
+export default ProfileLayout

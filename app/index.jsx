@@ -10,7 +10,7 @@ const index = () => {
   useEffect(() =>{
     if(user){
       router.replace('/(tabs)/home')
-    }
+    } 
   }, [user])
 
   

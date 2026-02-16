@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 import axios from '../utils/axios.js'
 import Toast from 'react-native-toast-message'
+import * as SecureStore from 'expo-secure-store'
+import { router } from 'expo-router'
 
 
 export const useAuthStore = create((set, get) =>({
@@ -41,7 +43,7 @@ export const useAuthStore = create((set, get) =>({
   },
 
   checkAuth: async() =>{
-    set({ isLoading: true })
+    
     try {
       const res = await axios.get('/auth/')
 
@@ -67,6 +69,11 @@ export const useAuthStore = create((set, get) =>({
       
 
       set({ user: null, isAuthenticated: false })
+      router.replace('/(auth)/login')
+      Toast.show({
+        text1: "Session Expired",
+        text2: "Please login to continue"
+      })
       console.log("user logout")
     } catch (error) {
       
@@ -85,8 +92,81 @@ export const useAuthStore = create((set, get) =>({
       console.log(error)
       set({ user: null, isAuthenticated: false })
     }
+  },
+
+  verifyAccount: async() =>{
+
+    set({ isLoading: true, error: null })
+
+    try {
+
+      const res = await axios.get('/auth/verify')
+
+      console.log(res.data)
+
+      set({ isLoading: false, error: null })
+
+
+      
+    } catch (error) {
+      console.log(error.response?.data?.message,)
+      set({ error: error.response?.data?.message, isLoading: false })
+      throw error
+    }
+  },
+
+  verifyCode: async(code) =>{
+
+    set({ isLoading: true, error: null })
+
+    try {
+
+      const res = await axios.post('/auth/verify-code', { code })
+
+      console.log(res.data)
+
+      set({ user: res.data, isLoading: false, error: null })
+      
+    } catch (error) {
+      console.log("erreo", error.response?.data?.message,)
+      set({ error: error.response?.data?.message, isLoading: false })
+      throw error
+    }
+  },
+
+  resendCode: async() =>{
+
+    set({ error: null })
+    try {
+
+      const res = await axios.get('/auth/resend-code')
+
+      console.log(res.data)
+
+      set({ error: null })
+      
+    } catch (error) {
+      console.log(error.response?.data?.message,)
+      set({ error: error.response?.data?.message || "internal server error" })
+      throw error
+    }
+
   }
 
 
   
 }))
+
+
+// Axios interceptore to check session expires
+
+/* axios.interceptors.response.use((response) => response, async(error) =>{
+
+  if(error.response?.status === 401){
+    useAuthStore.getState().logout()
+  }
+
+  return Promise.reject(error)
+
+} 
+) */

@@ -29,7 +29,7 @@ export default function RootLayout() {
   const pathname = usePathname()
   const [isReady, setIsReady] = useState(false)
 
-  console.log("user", user)
+ // console.log("user", user)
   const [fontsLoaded] = useFonts({
     'OutfitRegular': require('../assets/fonts/Outfit-Regular.ttf'),
     'OutfitBold': require('../assets/fonts/Outfit-Bold.ttf'),
@@ -84,13 +84,13 @@ export default function RootLayout() {
     //const inAuthGroup = segment[0] === '(auth)'
     const isAuthRoute = pathname.includes('(auth)')
     const isTabsRoute = pathname.includes('(tabs)')
-    if(user && !isTabsRoute) {
-      router.replace('/(tabs)/home')
+    if(user && isAuthRoute) {
+      router.replace('/(tabs)')
     } 
 
   }, [isAuthenticated, pathname, isReady, user])
 
-  useEffect(() => {
+/*   useEffect(() => {
     const fetchBackend = async () =>{
       try {
         const res = await axios.get('/')
@@ -103,7 +103,7 @@ export default function RootLayout() {
 
 
     fetchBackend()
-  }, [])
+  }, []) */
 
 
 
@@ -124,15 +124,15 @@ export default function RootLayout() {
     
       <SafeAreaProvider>
         <Animated.View className="flex-1 bg-fuchsia-200">
-          <StatusBar barStyle={'dark'} />
+          <StatusBar barStyle={'dark'}  />
           <Stack>
             
             <Stack.Screen name='index' options={{ headerShown: false }} />
             <Stack.Screen name='(auth)' options={{ headerShown: false }} />
             <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-            <Toast />
+            
           </Stack>
-          
+          <Toast />
  
         </Animated.View>
         

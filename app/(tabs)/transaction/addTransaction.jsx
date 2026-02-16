@@ -108,7 +108,7 @@ const addTransaction = () => {
 
       router.replace('/(tabs)/home')
     } catch (error) {
-      Alert.alert(error)
+      Alert.alert("error", error.message || "something went wrong")
     } finally {
       setTitle("")
       setDate(new Date())

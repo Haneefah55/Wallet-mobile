@@ -155,22 +155,32 @@ const budgetHome = () => {
       
           <View className="bg-fuchsia-900 mt-3 w-full h-[180px] rounded-xl shadow-md p-4 flex flex-row items-center justify-between px-5">
 
-            <View className="flex flex-col">
-              <Text className="text-lg text-white font-outfit-medium">Total Budget</Text>
-              <Text className="text-xl text-white font-outfit-bold">&#8358; {budget.toLocaleString()}</Text>
-              <Text className="text-lg mt-4 text-white font-outfit-medium">Total Spent</Text>
-              <Text className="text-xl text-white font-outfit-bold">&#8358; {spent.toLocaleString()}</Text>
-              <Text className="text-gray-200 font-outfit text-wrap mt-3">Remaining &#8358; {balance.toLocaleString()}</Text>
+            {budget === 0 &&
+              <View className="flex flex-col items-center justify-center">
+                <Text className="text-white text-2xl font-outfit-semibold">No budget found for this month</Text>
+                <TouchableOpacity className="mt-4" onPress={() => router.push('/(tabs)/budget/add-budget')}>
+                  <Text className="text-white mt-3 text-xl font-outfit-semibold">Create budget</Text>
+                </TouchableOpacity>
+                
+                
+              </View>
+            }
+            {
+              budget > 0 &&
 
-            </View>
+              <View className="flex flex-col">
+                <Text className="text-lg text-white font-outfit-medium">Total Budget</Text>
+                <Text className="text-xl text-white font-outfit-bold">&#8358; {budget.toLocaleString()}</Text>
+                <Text className="text-lg mt-4 text-white font-outfit-medium">Total Spent</Text>
+                <Text className="text-xl text-white font-outfit-bold">&#8358; {spent.toLocaleString()}</Text>
+                <Text className="text-gray-200 font-outfit text-wrap mt-3">Remaining &#8358; {balance.toLocaleString()}</Text>
+
+              </View>
+            }
+
+            
 
             <View className="flex ml-6 ">
-
-              {budget === 0 &&
-              <View >
-                <Text className="text-xl text-gray-200 mr-5 font-outfit-semibold">No Chart Data Found</Text>
-              </View>
-              }
 
               {budget > 0 &&
 
@@ -191,14 +201,9 @@ const budgetHome = () => {
                   )
                 }}
 
-
-
-
               />
 
               }
-
-              
 
             </View>
 
