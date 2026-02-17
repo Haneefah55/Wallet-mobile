@@ -5,6 +5,7 @@ import { Link, useRouter } from 'expo-router'
 import { useAuthStore } from '../../store/authStore';
 import { Ionicons, Lucide } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser'
+import { EXPO_PUBLIC_API_URL } from '@env'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -12,7 +13,7 @@ WebBrowser.maybeCompleteAuthSession()
 const LoginScreen = () => {
 
   const start = async() => {
-      await WebBrowser.openBrowserAsync(`${process.env.API_URL}/auth/google`)
+      await WebBrowser.openBrowserAsync(`${EXPO_PUBLIC_API_URL}/auth/google`)
   
       //console.log(result)
   }

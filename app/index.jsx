@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { Link, useRouter } from 'expo-router'
 import { useAuthStore } from '../store/authStore.js'
 
-const index = () => {
+const Index = () => {
   const { user } = useAuthStore()
   const router = useRouter()
 
@@ -51,4 +51,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Index
