@@ -5,15 +5,17 @@ import { Link, useRouter } from 'expo-router'
 import { useAuthStore } from '../../store/authStore';
 import { Ionicons, Lucide } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser'
-import { EXPO_PUBLIC_API_URL } from '@env'
+//import { EXPO_PUBLIC_API_URL } from '@env'
 
 WebBrowser.maybeCompleteAuthSession()
 
 
 const LoginScreen = () => {
 
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL
+
   const start = async() => {
-      await WebBrowser.openBrowserAsync(`${EXPO_PUBLIC_API_URL}/auth/google`)
+      await WebBrowser.openBrowserAsync(`${apiUrl}/auth/google`)
   
       //console.log(result)
   }
@@ -75,7 +77,9 @@ const LoginScreen = () => {
           className="p-3 bg-white border-2 border-fuchsia-900 font-outfit rounded-lg  w-[280px] mt-3 placeholder:text-grey-400"
           placeholder='Enter your email'
           autoCapitalize='none'
+          placeholderTextColor={"#9ca3af"}
           onChangeText={(email) => setEmail(email)}
+          style={{ color: "#000000"}}
           keyboardType='email-address'
 
         />
@@ -85,6 +89,8 @@ const LoginScreen = () => {
           className="p-3 bg-white border-2 border-fuchsia-900 font-outfit rounded-lg  w-[280px] mt-3 placeholder:text-grey-400"
           placeholder='Enter your password'
           secureTextEntry={true}
+          placeholderTextColor={"#9ca3af"}
+          style={{ color: "#000000"}}
           onChangeText={(password) => setPassword(password)}
 
         />

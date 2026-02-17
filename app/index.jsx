@@ -1,17 +1,41 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
 import React, { useEffect } from 'react'
 import { Link, useRouter } from 'expo-router'
 import { useAuthStore } from '../store/authStore.js'
+import axiosInstance from '../utils/axios.js'
+
 
 const Index = () => {
   const { user } = useAuthStore()
   const router = useRouter()
+
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL
 
   useEffect(() =>{
     if(user){
       router.replace('/(tabs)/home')
     } 
   }, [user])
+
+  useEffect(() =>{
+
+    const fetch = async() =>{
+      try {
+        const res = await axiosInstance.get('/fetch')
+
+        Alert.alert('response from backend', res.data.message)
+        //console.log('response from backend', res.data)
+      } catch (error) {
+        console.log(error.message)
+      }
+      
+
+    }
+
+
+    fetch()
+
+  }, [])
 
   
   return (

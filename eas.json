@@ -7,19 +7,26 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "android": {
-        "buildType": "apk"
+      "env": {
+        "EXPO_PUBLIC_API_URL":"https://wallet-353q.onrender.com/api"
       }
+      
     },
     "preview": {
       "distribution": "internal",
       "android": {
         "buildType": "apk",
         "gradleCommand": ":app:assembleRelease"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL":"https://wallet-353q.onrender.com/api"
       }
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_API_URL":"https://wallet-353q.onrender.com/api"
+      }
     }
   },
   "submit": {

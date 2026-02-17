@@ -19,9 +19,9 @@ WebBrowser.maybeCompleteAuthSession()
 
 const SignUpScreen = () => {
 
- 
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL
   const start = async() => {
-    await WebBrowser.openBrowserAsync(`${process.env.API_URL}/auth/google`)
+    await WebBrowser.openBrowserAsync(`${apiUrl}/auth/google`)
 
     //console.log(result)
   }
@@ -100,6 +100,8 @@ const SignUpScreen = () => {
             placeholder='Enter your username' 
             onChangeText={(name) => setName(name)}
             keyboardType='email-address'
+            placeholderTextColor={"#9ca3af"}
+            style={{ color: "#000000"}}
     
     
           />
@@ -110,6 +112,8 @@ const SignUpScreen = () => {
             placeholder='Enter your email'
             autoCapitalize='none'
             onChangeText={(email) => setEmail(email)}
+            placeholderTextColor={"#9ca3af"}
+            style={{ color: "#000000"}}
     
     
           />
@@ -120,6 +124,8 @@ const SignUpScreen = () => {
             placeholder='Enter your password'
             secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
+            placeholderTextColor={"#9ca3af"}
+            style={{ color: "#000000"}}
     
     
           />
